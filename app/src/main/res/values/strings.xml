@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name"><b><i><u>MemoryUsage</u></i></b></string>
+    <string name="button">Generate Strings</string>
+</resources>
