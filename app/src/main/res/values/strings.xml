@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name"><b><i><u>MemoryUsage</u></i></b></string>
     <string name="button">Generate Strings</string>
+    <string name="settings">SETTINGS</string>
+    <string name="exit">EXIT</string>
+    <string name="restart">RESTART</string>
 </resources>
