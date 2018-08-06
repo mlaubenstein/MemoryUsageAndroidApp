@@ -10,6 +10,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,23 +26,27 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     private AlphaAnimation buttonClick = new AlphaAnimation(1F,0.8F);
     private String[] star;
     private int counter;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+       imageView = findViewById(R.id.imageView);
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(this);
+        showMemory();
+        setHasOptionMenu(true);
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
+
+        imageView.setVisibility(View.INVISIBLE);
         textView = findViewById(R.id.textView);
         activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         assert activityManager != null;
         memoryClass = activityManager.getMemoryClass();
         rotate = AnimationUtils.loadAnimation(this, R.anim.rotate);
 
-        Button button = findViewById(R.id.button);
-        button.setOnClickListener(this);
-        showMemory();
-        setHasOptionMenu(true);
-        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 
 
         if (getIntent().getBooleanExtra("crash", false))
@@ -102,6 +107,10 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         showMemory();
         view.startAnimation(buttonClick);
         //view.startAnimation(rotate);
+        //textView.startAnimation(rotate);
+        imageView.setVisibility(View.VISIBLE);
+        imageView.startAnimation(rotate);
+
     }
 
 
@@ -122,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             for( counter = index; activityString.length>counter; counter--){
                 activityString[counter] = null;
             }
+            //System.gc();
             //onTrimMemory(ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL);
 
 
